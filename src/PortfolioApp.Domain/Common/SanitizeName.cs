@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 namespace PortfolioApp.Domain.Common;
 
 
-public static class SanitizeName
+public  static class SanitizeName
 {
     public interface ISanitizeName
     {
