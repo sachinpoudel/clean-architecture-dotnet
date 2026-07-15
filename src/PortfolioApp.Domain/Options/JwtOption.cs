@@ -1,6 +1,6 @@
 namespace PortfolioApp.Domain.Options;
 
-public class JwtTokenOption
+public sealed class JwtTokenOption
 {
     public const string JwtConfig = "JwtConfig";
     public string SecretKey { get; set; } = string.Empty;

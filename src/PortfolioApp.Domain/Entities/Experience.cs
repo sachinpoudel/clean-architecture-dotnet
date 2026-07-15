@@ -3,7 +3,7 @@ using PortfolioApp.Domain.UnitOfWork;
 
 namespace PortfolioApp.Domain.Entities;
 
-public class Experince : BaseEntity, IUserEntity
+public class Experience : BaseEntity, IUserEntity
 {
     public Guid UserId {get;set;}
     public required string Title {get; init;}

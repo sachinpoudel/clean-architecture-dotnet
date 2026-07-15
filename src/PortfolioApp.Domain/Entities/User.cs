@@ -27,6 +27,3 @@ public ICollection<Message> Certifications {get;set;} = new List<Message>();
     }
 }
 
-public class Experience
-{
-}

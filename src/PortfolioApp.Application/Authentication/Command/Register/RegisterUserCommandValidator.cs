@@ -12,7 +12,7 @@ public class ValidateCreateUserCommand : AbstractValidator<RegisterUserCommand>
         RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("A valid email address is required.");
         RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required.");
         RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required.");
-        RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Confirm password is required.");
+        // RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Confirm password is required.");
         RuleFor(x => x.Bio).NotEmpty().WithMessage("Bio is required.");
         RuleFor(x => x.ProfilePicture).NotEmpty().WithMessage("Profile picture is required.");
         RuleFor(x => x.Country).NotEmpty().WithMessage("Country is required.");

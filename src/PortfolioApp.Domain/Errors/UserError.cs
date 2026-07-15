@@ -51,4 +51,8 @@ public static class UserError
     {
         return BaseError.BadRequest("Failed to Assign Role", $"An error occurred while trying to assign the role {role} to the user with ID {userId}. Please try again.");
     }
+    public static BaseError InvalidUserName(string userName)
+    {
+        return BaseError.BadRequest("Invalid User Name", $"The user name {userName} is invalid. Please provide a valid user name.");
+    }
 }

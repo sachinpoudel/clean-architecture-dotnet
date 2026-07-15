@@ -1,0 +1,20 @@
+using PortfolioApp.Domain.Interfaces;
+using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Infrastructure.Context;
+using PortfolioApp.Infrastructure.Repositories;
+
+namespace PortfolioApp.Infrastructure.UnitOfWork;
+
+internal sealed class UnitOfWork(AppDbContext context) : IUnitOfWork
+{
+    public IUserRepository UserRepository { get; } = new UserRepository(context);
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
+    {
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task RollbackAsync(CancellationToken cancellationToken = default)
+    {
+        await context.DisposeAsync();
+    }
+}
