@@ -2,16 +2,17 @@ using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using PortfolioApp.Application.Authentication.Dtos;
+using PortfolioApp.Application.Users.Command.CreateUser;
 using PortfolioApp.Domain.Common;
 using PortfolioApp.Domain.Common.ResultPattern;
 using PortfolioApp.Domain.Entities;
 using PortfolioApp.Domain.Errors;
 using PortfolioApp.Domain.Interfaces;
 
-namespace PortfolioApp.Application.Users.Command.CreateUser;
+namespace PortfolioApp.Application.Authentication.Command.Register;
 
 
-public class CreateUserCommandHandler(IAuthenticationRepository authenticationRepository,
+public class RegisterUserCommandHandler(IAuthenticationRepository authenticationRepository,
 SanitizeName.SanitizeNameImpl sanitizeName, IMapper mapper,
  ILogger logger) : IRequestHandler<RegisterUserCommand, Result<RegisterResponseDto>>
 {
