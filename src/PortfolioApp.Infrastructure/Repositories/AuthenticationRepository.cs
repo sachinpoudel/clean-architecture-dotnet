@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using PortfolioApp.Domain.Common.ResultPattern;
 using PortfolioApp.Domain.Entities;
 using PortfolioApp.Domain.Errors;
+using PortfolioApp.Domain.Enums;
 using PortfolioApp.Domain.Interfaces;
 
 namespace PortfolioApp.Infrastructure.Repositories;
@@ -32,14 +33,22 @@ SignInManager<User> signInManager
         throw new NotImplementedException();
     }
 
-    public Task<Result<User>> FindByEmailAsync(string email)
+    public async Task<Result<User>> FindByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        var user = await userManager.FindByEmailAsync(email);
+
+        if (user is null)
+        {
+            return Result<User>.Failure(UserError.UserNotFound(email));
+        }
+
+        return Result<User>.Success(user);
     }
 
-    public Task<Result<bool>> IsAdminExistsAsync()
+    public async Task<Result<bool>> IsAdminExistsAsync()
     {
-        throw new NotImplementedException();
+        var usersInRole = await userManager.GetUsersInRoleAsync(UserRole.Admin.ToString());
+        return Result<bool>.Success(usersInRole.Any());
     }
 
     public Task<Result<bool>> IsInRoleAsync(User user, string roleName)
@@ -54,17 +63,16 @@ SignInManager<User> signInManager
 
     public async Task<Result<User>> RegisterUserAsync(User request, string password)
     {
-        if (await userManager.FindByEmailAsync(request.Email) is not null)
+        if (await userManager.FindByEmailAsync(request.Email!) is not null)
         {
             return Result<User>.Failure(UserError.UserAlreadyExists(request.Email));
         }
 
-        var hashPassword = userManager.PasswordHasher.HashPassword(request, password);
-
-        var user = userManager.CreateAsync(request, password);
+        var identityResult = await userManager.CreateAsync(request, password);
 
 
-        if (user.Result.Succeeded)
+
+        if (identityResult.Succeeded)
         {
             return Result<User>.Success(request);
         }

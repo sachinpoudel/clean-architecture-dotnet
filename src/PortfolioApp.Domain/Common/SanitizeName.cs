@@ -2,15 +2,14 @@ using System.Text.RegularExpressions;
 namespace PortfolioApp.Domain.Common;
 
 
-public  static class SanitizeName
-{
+
     public interface ISanitizeName
     {
-        bool SanitizeName(string name);
+        bool Execute(string name);
     }
-    public class SanitizeNameImpl : ISanitizeName
+    public  class SanitizeName : ISanitizeName
     {
-        public bool SanitizeName(string name)
+        public   bool Execute(string name)
         {
             if(string.IsNullOrWhiteSpace(name)) return false;
 
@@ -24,5 +23,5 @@ public  static class SanitizeName
             return true;
         }
     }
-}
+
 

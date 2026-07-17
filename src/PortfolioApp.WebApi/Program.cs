@@ -18,10 +18,10 @@ try
     builder.Services.AddApplicationServices();
     builder.Services.AddInfrastructure();
     builder.Services.AddDatabase(); // 
-    builder.Services.AddJwtAuthentication(builder.Configuration.GetSection("JwtConfig"));
+    builder.Services.AddJwtAuthentication(builder.Configuration);
 
 
-
+builder.Services.AddHealthChecks();
     builder.Services.AddOpenApi();
 
     var app = builder.Build();

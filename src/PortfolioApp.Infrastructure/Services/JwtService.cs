@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using PortfolioApp.Domain.Entities;
+using PortfolioApp.Domain.Interfaces;
 using PortfolioApp.Domain.Options;
 
 namespace PortfolioApp.Infrastructure.Services;
@@ -18,10 +19,10 @@ public class JwtServices(
     IOptions<JwtTokenOption> jwtOptions,
     UserManager<User> userManager,
     ILogger<JwtServices> logger
-)
+) : IJwtTokenService
 {
     private readonly JwtTokenOption jwtTokenOption = jwtOptions.Value;
-    public async Task<string> GenerateJwtToken(User user)
+    public async Task<string> GenerateJwtTokenAsync(User user)
     {
 
 
@@ -42,7 +43,7 @@ public class JwtServices(
     //get userId from token
 
 
-    public async Task<string?> GetUserId(string token)
+    public async Task<string?> GetUserIdFromTokenAsync(string token)
     {
         if (string.IsNullOrWhiteSpace(token))
         {
@@ -75,7 +76,7 @@ public class JwtServices(
         }
     }
 
-    public bool ValidateCurrentToken(string token)
+    public async Task<bool> ValidateCurrentTokenAsync(string token)
     {
         try
         {
@@ -96,7 +97,7 @@ public class JwtServices(
     {
         try
         {
-            var userId = await GetUserId(accessToken);
+            var userId = await GetUserIdFromTokenAsync(accessToken);
             var user = await userManager.FindByIdAsync(userId.ToString());
 
             if (user == null)
@@ -107,8 +108,8 @@ public class JwtServices(
             {
                 throw new UnauthorizedAccessException("Invalid or expired refresh token");
             }
-            var newAccessToken = await GenerateJwtToken(user);
-            var newRefreshToken =  GenerateRefreshToken();
+            var newAccessToken = await GenerateJwtTokenAsync(user);
+            var newRefreshToken = await GenerateRefreshTokenAsync();
             await SaveRefreshTokenAsync(user, newRefreshToken);
 
             return (newAccessToken, newRefreshToken);
@@ -141,7 +142,7 @@ public class JwtServices(
 
 
 
-    public string GenerateRefreshToken()
+    public async Task<string> GenerateRefreshTokenAsync()
     {
         var randomNumber = new byte[64];
         using var rng = RandomNumberGenerator.Create();

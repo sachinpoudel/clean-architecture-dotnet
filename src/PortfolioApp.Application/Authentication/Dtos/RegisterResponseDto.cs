@@ -4,7 +4,9 @@ namespace PortfolioApp.Application.Authentication.Dtos;
 public record RegisterResponseDto(
     Guid UserId,
    string Email,
-   DateTime CreatedAt
+   DateTime CreatedAt,
+   string AccessToken,
+   string RefreshToken
    
    
 );
