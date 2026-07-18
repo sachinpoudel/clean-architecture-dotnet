@@ -1,7 +1,7 @@
 using PortfolioApp.Domain.Common.ResultPattern;
 using PortfolioApp.Domain.Entities;
 
-namespace PortfolioApp.Domain.Interfaces;
+namespace PortfolioApp.Application.Interfaces;
 
 public interface IAuthenticationRepository
 {

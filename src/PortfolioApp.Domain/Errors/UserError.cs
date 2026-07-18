@@ -5,7 +5,7 @@ namespace PortfolioApp.Domain.Errors;
 
 public static class UserError
 {
-    public static BaseError UserNotFound(string userId)
+    public static BaseError UserNotFound(Guid userId)
     {
         return BaseError.NotFound("User Not Found", $"The user with ID {userId} was not found.");
     }
@@ -54,5 +54,9 @@ public static class UserError
     public static BaseError InvalidUserName(string userName)
     {
         return BaseError.BadRequest("Invalid User Name", $"The user name {userName} is invalid. Please provide a valid user name.");
+    }
+    public static BaseError FailedToUploadProfilePicture()
+    {
+        return BaseError.BadRequest("Failed to Upload Profile Picture", $"An error occurred while trying to upload the profile picture. Please try again.");
     }
 }

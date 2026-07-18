@@ -1,10 +1,10 @@
 using PortfolioApp.Domain.Common.ResultPattern;
 using PortfolioApp.Domain.Entities;
 
-namespace PortfolioApp.Domain.Interfaces;
+namespace PortfolioApp.Application.Interfaces.Services;
 
 
-public interface IJwtTokenService
+public interface IJwtService
 {
  Task<string> GenerateJwtTokenAsync(User user);
   Task<string> GenerateRefreshTokenAsync(); 

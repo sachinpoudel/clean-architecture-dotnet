@@ -1,8 +1,9 @@
 using PortfolioApp.Domain.Common;
-using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Domain.Interfaces;
+
 
 namespace PortfolioApp.Domain.Entities;
-
+    
 public class Project : BaseEntity , IUserEntity
 {
     public Guid UserId {get;set;}

@@ -1,17 +1,40 @@
 using PortfolioApp.Domain.Common;
-using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Domain.Interfaces;
+
 
 namespace PortfolioApp.Domain.Entities;
 
 
-public class AboutMe : BaseEntity, IUserEntity{
-    public Guid UserId {get;set;}
+public class AboutMe : BaseEntity, IUserEntity
+{
+    public Guid UserId { get; set; }
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
     public string Headline { get; init; } = string.Empty;
     public string Email { get; init; } = string.Empty;
     public string Bio { get; init; } = string.Empty;
-    public string ProfilePicture { get; init; } = string.Empty;
+    public string ProfilePictureUrl { get; private set; } = string.Empty;
+    public string ProfilePicturePublicId { get; private set; } = string.Empty;
+
+
     public string Country { get; init; } = string.Empty;
     public string City { get; init; } = string.Empty;
+
+
+
+    internal AboutMe() { } // this is required by EF Core for materialization
+
+
+
+    public void SetProfilePicture(string url, string publicId)
+    {
+
+        if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(publicId))
+        {
+            throw new ArgumentException("Profile picture URL and public ID cannot be null or empty.");
+        }
+
+        ProfilePictureUrl = url;
+        ProfilePicturePublicId = publicId;
+    }
 }

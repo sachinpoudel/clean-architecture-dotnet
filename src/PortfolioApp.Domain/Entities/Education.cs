@@ -1,4 +1,5 @@
-using PortfolioApp.Domain.UnitOfWork;
+
+using PortfolioApp.Domain.Interfaces;
 using PortfolioApp.Domain.Common;
 
 namespace PortfolioApp.Domain.Entities;

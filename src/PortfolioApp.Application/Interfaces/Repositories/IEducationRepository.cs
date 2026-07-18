@@ -1,7 +1,7 @@
 using PortfolioApp.Domain.Entities;
 using PortfolioApp.Domain.Interfaces;
 
-namespace PortfolioApp.Domain.Interfaces;
+namespace PortfolioApp.Application.Interfaces;
 
 
 public interface IEducationRepository: IGenericRepository<Education>

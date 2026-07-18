@@ -8,8 +8,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using PortfolioApp.Domain.Entities;
-using PortfolioApp.Domain.Interfaces;
+using PortfolioApp.Application.Interfaces;
 using PortfolioApp.Domain.Options;
+using PortfolioApp.Application.Interfaces.Services;
 
 namespace PortfolioApp.Infrastructure.Services;
 
@@ -19,7 +20,7 @@ public class JwtServices(
     IOptions<JwtTokenOption> jwtOptions,
     UserManager<User> userManager,
     ILogger<JwtServices> logger
-) : IJwtTokenService
+) : IJwtService
 {
     private readonly JwtTokenOption jwtTokenOption = jwtOptions.Value;
     public async Task<string> GenerateJwtTokenAsync(User user)

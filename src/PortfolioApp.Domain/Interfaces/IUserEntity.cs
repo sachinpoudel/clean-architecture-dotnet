@@ -1,4 +1,4 @@
-namespace PortfolioApp.Domain.UnitOfWork;
+namespace PortfolioApp.Domain.Interfaces;
 public interface IUserEntity
 {
     Guid Id { get; set; }

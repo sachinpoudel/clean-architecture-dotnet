@@ -1,6 +1,9 @@
+using System.Net.Http.Headers;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using PortfolioApp.Application.Authentication.Dtos;
+using PortfolioApp.Application.Interfaces;
+using PortfolioApp.Application.Interfaces.Services;
 using PortfolioApp.Application.Users.Command.CreateUser;
 using PortfolioApp.Domain.Common;
 using PortfolioApp.Domain.Common.ResultPattern;
@@ -12,7 +15,7 @@ namespace PortfolioApp.Application.Authentication.Command.Register;
 
 
 public class RegisterUserCommandHandler(IAuthenticationRepository authenticationRepository,
-ISanitizeName sanitizeName, IJwtTokenService jwtService,
+ISanitizeName sanitizeName, IJwtService jwtService,
  ILogger<RegisterUserCommandHandler> logger) : IRequestHandler<RegisterUserCommand, Result<RegisterResponseDto>>
 {
     public async Task<Result<RegisterResponseDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -66,6 +69,7 @@ ISanitizeName sanitizeName, IJwtTokenService jwtService,
         var accessToken = await jwtService.GenerateJwtTokenAsync(user.Value);
 
         var refreshToken = await jwtService.GenerateRefreshTokenAsync();
+        Console.WriteLine($"Generated access Token: {accessToken}");
 
         // user.Value.RefreshToken = refreshToken;
         // user.Value.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);

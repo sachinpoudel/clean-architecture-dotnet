@@ -1,5 +1,5 @@
-using PortfolioApp.Domain.Interfaces;
-using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Application.Interfaces;
+using PortfolioApp.Application.Interfaces.UnitofWork;
 using PortfolioApp.Infrastructure.Context;
 using PortfolioApp.Infrastructure.Repositories;
 

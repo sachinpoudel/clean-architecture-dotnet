@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using PortfolioApp.Domain.Common;
-using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Domain.Interfaces;
 
 namespace PortfolioApp.Domain.Entities;
 

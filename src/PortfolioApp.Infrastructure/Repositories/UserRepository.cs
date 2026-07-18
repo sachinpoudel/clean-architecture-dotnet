@@ -1,11 +1,11 @@
 using PortfolioApp.Domain.Entities;
-using PortfolioApp.Domain.Interfaces;
+using PortfolioApp.Application.Interfaces;
 using PortfolioApp.Infrastructure.Context;
 
 namespace PortfolioApp.Infrastructure.Repositories;
 
 
-internal class UserRepository(AppDbContext context)
+public class UserRepository(AppDbContext context)
     : IGenericRepository<User>, IUserRepository
 {
     public Task<User> AddAsync(User entity)

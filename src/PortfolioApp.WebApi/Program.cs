@@ -16,7 +16,7 @@ try
 
     builder.AddPresentation();
     builder.Services.AddApplicationServices();
-    builder.Services.AddInfrastructure();
+    builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddDatabase(); // 
     builder.Services.AddJwtAuthentication(builder.Configuration);
 

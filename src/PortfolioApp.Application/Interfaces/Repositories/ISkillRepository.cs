@@ -1,6 +1,6 @@
 using PortfolioApp.Domain.Entities;
 
-namespace PortfolioApp.Domain.Interfaces;
+namespace PortfolioApp.Application.Interfaces;
 
 public interface ISkillRepository : IGenericRepository<Skills>
 {

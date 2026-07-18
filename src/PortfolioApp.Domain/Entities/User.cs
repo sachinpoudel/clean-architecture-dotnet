@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using PortfolioApp.Domain.UnitOfWork;
+using PortfolioApp.Domain.Interfaces;
+// using PortfolioApp.Domain.UnitOfWork;
 namespace PortfolioApp.Domain.Entities;
 
 
@@ -10,7 +11,6 @@ public class User : IdentityUser<Guid>, IUserEntity
     public DateTime RefreshTokenExpiryTime { get; set; }
     // public string? PasswordHash { get; set; }
     // public string? PasswordSalt { get; set; }
-
 
 public AboutMe AboutMe {get;set;} = new AboutMe();
 public ICollection<Education> Educations {get;set;} = new List<Education>();
@@ -24,6 +24,10 @@ public ICollection<Message> Certifications {get;set;} = new List<Message>();
     {
         get => Id;
         set => Id = value;
+    }
+    public void SetProfilePicture(string url, string publicId)
+    {
+        AboutMe.SetProfilePicture(url, publicId);
     }
 }
 

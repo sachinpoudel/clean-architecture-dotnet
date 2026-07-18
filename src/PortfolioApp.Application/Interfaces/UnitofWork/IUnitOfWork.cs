@@ -1,6 +1,5 @@
-using PortfolioApp.Domain.Interfaces;
 
-namespace PortfolioApp.Domain.UnitOfWork;
+namespace PortfolioApp.Application.Interfaces.UnitofWork;
 
 
 public interface IUnitOfWork

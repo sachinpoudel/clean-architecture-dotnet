@@ -3,7 +3,7 @@ using PortfolioApp.Domain.Common.ResultPattern;
 using PortfolioApp.Domain.Entities;
 using PortfolioApp.Domain.Errors;
 using PortfolioApp.Domain.Enums;
-using PortfolioApp.Domain.Interfaces;
+using PortfolioApp.Application.Interfaces;
 
 namespace PortfolioApp.Infrastructure.Repositories;
 
