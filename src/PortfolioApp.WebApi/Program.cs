@@ -1,3 +1,4 @@
+using Hangfire;
 using PortfolioApp.Application.Extensions;
 using PortfolioApp.Infrastructure.Extensions;
 using PortfolioApp.WebApi.Extensions;
@@ -16,9 +17,9 @@ try
 
     builder.AddPresentation();
     builder.Services.AddApplicationServices();
-    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddInfrastructure();
     builder.Services.AddDatabase(); // 
-    builder.Services.AddJwtAuthentication(builder.Configuration);
+    builder.Services.AddJwtAuthentication();
 
 
 builder.Services.AddHealthChecks();
@@ -42,6 +43,7 @@ builder.Services.AddHealthChecks();
     app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UsePortfolioHangfireDashboard();
     app.MapControllers();
     app.MapHealthChecks("/health");
     app.UseStatusCodePages();

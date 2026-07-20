@@ -31,7 +31,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
        profileBuilder.Property(p => p.FirstName).HasMaxLength(50);
        profileBuilder.Property(p => p.LastName).HasMaxLength(50);
        profileBuilder.Property(p => p.ProfilePictureUrl).HasMaxLength(2000);
-       profileBuilder.Property(p => p.ProfilePicturePublicId).HasMaxLength(2000);
+    //    profileBuilder.Property(p => p.ProfilePicturePublicId).HasMaxLength(2000);
        profileBuilder.Property(p => p.Bio).HasMaxLength(2500);
        profileBuilder.Property(p => p.Headline).HasMaxLength(250);
        profileBuilder.Property(p => p.Country).HasMaxLength(50);

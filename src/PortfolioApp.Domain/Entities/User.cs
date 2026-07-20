@@ -25,9 +25,9 @@ public ICollection<Message> Certifications {get;set;} = new List<Message>();
         get => Id;
         set => Id = value;
     }
-    public void SetProfilePicture(string url, string publicId)
+    public void SetProfilePicture(string url)
     {
-        AboutMe.SetProfilePicture(url, publicId);
+        AboutMe.SetProfilePicture(url);
     }
 }
 

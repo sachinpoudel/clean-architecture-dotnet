@@ -14,7 +14,7 @@ public class AboutMe : BaseEntity, IUserEntity
     public string Email { get; init; } = string.Empty;
     public string Bio { get; init; } = string.Empty;
     public string ProfilePictureUrl { get; private set; } = string.Empty;
-    public string ProfilePicturePublicId { get; private set; } = string.Empty;
+    // public string ProfilePicturePublicId { get; private set; } = string.Empty;
 
 
     public string Country { get; init; } = string.Empty;
@@ -22,19 +22,19 @@ public class AboutMe : BaseEntity, IUserEntity
 
 
 
-    internal AboutMe() { } // this is required by EF Core for materialization
+    public AboutMe() { } // this is required by EF Core for materialization
 
 
 
-    public void SetProfilePicture(string url, string publicId)
+    public void SetProfilePicture(string url)
     {
 
-        if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(publicId))
+        if (string.IsNullOrEmpty(url))
         {
-            throw new ArgumentException("Profile picture URL and public ID cannot be null or empty.");
+            throw new ArgumentException("Profile picture URL cannot be null or empty.");
         }
 
         ProfilePictureUrl = url;
-        ProfilePicturePublicId = publicId;
+        // ProfilePicturePublicId = publicId;
     }
 }

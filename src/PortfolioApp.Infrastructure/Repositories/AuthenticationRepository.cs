@@ -39,7 +39,7 @@ SignInManager<User> signInManager
 
         if (user is null)
         {
-            return Result<User>.Failure(UserError.UserNotFound(email));
+            return Result<User>.Failure(UserError.UserAlreadyExists(email));
         }
 
         return Result<User>.Success(user);

@@ -46,6 +46,9 @@ public static class WebAppExtension
 
         builder.Services.Configure<ConnStringOption>(builder.Configuration.GetSection(ConnStringOption.ConnectionString));
         builder.Services.Configure<JwtTokenOption>(builder.Configuration.GetSection(JwtTokenOption.JwtConfig));
+        builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
+        builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.Configure<HangfireSettings>(builder.Configuration.GetSection("HangfireSettings"));
 
         builder.Services.AddControllers();
     }

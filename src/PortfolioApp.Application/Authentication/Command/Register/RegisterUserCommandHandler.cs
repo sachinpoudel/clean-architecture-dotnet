@@ -45,14 +45,14 @@ ISanitizeName sanitizeName, IJwtService jwtService,
         var mappedUser = new User
         {
             UserName = request.UserName,
-            Email = request.Email,
+           
             AboutMe = new AboutMe
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
                 Bio = request.Bio,
-                ProfilePicture = request.ProfilePicture,
+             
                 Country = request.Country,
                 City = request.City,
                 Headline = request.Headline

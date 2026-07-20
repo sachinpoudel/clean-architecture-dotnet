@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using PortfolioApp.Application.Interfaces;
 using PortfolioApp.Application.Interfaces.Services;
 using PortfolioApp.Application.Interfaces.UnitofWork;
@@ -14,17 +13,22 @@ namespace PortfolioApp.Infrastructure.Extensions;
 
 public static class InfrastructureExtension
 {
-  public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+  public static IServiceCollection AddInfrastructure(this IServiceCollection services)
   {
 
     services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
     services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
     services.AddScoped<IUserRepository, UserRepository>();
+    services.AddScoped<IMessageRepository, MessageRepository>();
     services.AddScoped<IJwtService, JwtServices>();
 
 
 
-    services.AddFileStorage(configuration);
+
+// extension configurations
+    services.AddFileStorage();
+    services.AddEmailService();
+    services.AddBackgroundJob();
     return services;
   }
 }

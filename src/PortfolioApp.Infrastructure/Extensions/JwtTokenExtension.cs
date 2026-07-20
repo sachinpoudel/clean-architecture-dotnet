@@ -3,8 +3,8 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PortfolioApp.Domain.Entities;
 using PortfolioApp.Domain.Options;
@@ -15,17 +15,8 @@ namespace PortfolioApp.Infrastructure.Extensions;
 
 public static class JwtTokenExtension
 {
-    public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddJwtAuthentication(this IServiceCollection services)
     {
-        var jwtSettings = configuration.GetSection("JwtConfig").Get<JwtTokenOption>();
-
-        if (jwtSettings is null || string.IsNullOrEmpty(jwtSettings.SecretKey) || string.IsNullOrEmpty(jwtSettings.Issuer) || string.IsNullOrEmpty(jwtSettings.Audience))
-        {
-            throw new InvalidOperationException("JWT configuration is missing or invalid.");
-        }
-
-        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
-
         services.AddIdentity<User, IdentityRole<Guid>>()
           .AddEntityFrameworkStores<AppDbContext>()
           .AddApiEndpoints()
@@ -37,8 +28,20 @@ public static class JwtTokenExtension
                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                        options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
                    })
-                   .AddJwtBearer("Bearer", options =>
+                   .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, _ => { });
+
+        services.AddOptions<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme)
+            .Configure<IOptions<JwtTokenOption>>((options, jwtOptions) =>
                    {
+                       var jwtSettings = jwtOptions.Value;
+
+                       if (string.IsNullOrEmpty(jwtSettings.SecretKey) || string.IsNullOrEmpty(jwtSettings.Issuer) || string.IsNullOrEmpty(jwtSettings.Audience))
+                       {
+                           throw new InvalidOperationException("JWT configuration is missing or invalid.");
+                       }
+
+                       var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
+
                        options.RequireHttpsMetadata = false;
                        //options.SaveToken = true;
                        options.TokenValidationParameters = new TokenValidationParameters

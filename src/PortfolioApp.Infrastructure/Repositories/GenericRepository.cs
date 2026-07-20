@@ -8,9 +8,10 @@ namespace PortfolioApp.Infrastructure.Repositories;
 
 public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : class, IUserEntity
 {
-    public Task<T> AddAsync(T entity)
+    public async Task<T> AddAsync(T entity)
     {
-        throw new NotImplementedException();
+        await context.Set<T>().AddAsync(entity);
+        return entity;
     }
 
     public Task<T> DeleteAsync(T entity)

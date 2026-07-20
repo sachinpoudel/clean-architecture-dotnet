@@ -1,5 +1,4 @@
 // Infrastructure/Storage/FileStorageServiceExtensions.cs
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PortfolioApp.Application.Interfaces.Services;
 using PortfolioApp.Domain.Options;
@@ -9,9 +8,8 @@ namespace PortfolioApp.Infrastructure.Extensions;
 
 public static class FileStorageServiceExtensions
 {
-    public static IServiceCollection AddFileStorage(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddFileStorage(this IServiceCollection services)
     {
-        services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
         services.AddScoped<IFileStorageService, CloudinaryStorageService>();
         return services;
     }
